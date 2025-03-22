@@ -55,6 +55,7 @@ def index():
                 file.save(filepath)
 
                 df = pd.read_excel(filepath, sheet_name="Sheet1", skiprows=2, engine="openpyxl")
+                df.columns = df.columns.str.strip()
                 print("COLUMNS READ >>>", df.columns.tolist())
                 df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
                 df = df.dropna(subset=["Date", "Close"]).reset_index(drop=True)
